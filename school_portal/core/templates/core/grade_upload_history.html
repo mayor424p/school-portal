@@ -1,0 +1,58 @@
+{% extends 'core/dashboard2.html' %}
+{% block title %}Uploaded Grades History{% endblock %}
+
+{% block content %}
+<div class="grade-history-container">
+    <h2 class="grade-history-title">Your Uploaded Grades</h2>
+
+    {% if grades %}
+        <div class="grade-table-wrapper">
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Subject</th>
+                        <th>1st CA</th>
+                        <th>2nd CA</th>
+                        <th>3rd CA</th>
+                        <th>Exam</th>
+                        <th>Total</th>
+                        <th>Term</th>
+                        <th>Session</th>
+                        <th>Date Uploaded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grade in grades %}
+                    <tr>
+                        <td>{{ grade.student.get_full_name }}</td>
+                        <td>{{ grade.student.studentprofile.student_class.name }}</td>
+                        <td>{{ grade.subject }}</td>
+                        <td>{{ grade.first_ca }}</td>
+                        <td>{{ grade.second_ca }}</td>
+                        <td>{{ grade.third_ca }}</td>
+                        <td>{{ grade.exam }}</td>
+                        <td><strong>{{ grade.total_score }}</strong></td>
+                        <td>{{ grade.term }}</td>
+                        <td>{{ grade.session }}</td>
+                        <td>{{ grade.created_at|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <form method="post" action="{% url 'clear_grade_history' %}" class="clear-history-form">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Clear History</button>
+        </form>
+    {% else %}
+        <p class="no-history">No uploaded grades yet.</p>
+    {% endif %}
+
+    <div class="upload-more-link">
+        <a href="{% url 'upload_grade' %}" class="btn btn-primary">Upload More Grades</a>
+    </div>
+</div>
+{% endblock %}

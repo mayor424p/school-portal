@@ -1,0 +1,25 @@
+{% extends "core/dashboard2.html" %}
+{% block title %}{{ assignment.title }} - Assignment Details{% endblock %}
+
+{% block content %}
+<div class="assignment-detail-container">
+    <h2 class="assignment-title">{{ assignment.title }}</h2>
+
+    <div class="assignment-info">
+        <p><strong>Assigned to:</strong> {{ assignment.assigned_class.name }} ({{ assignment.assigned_class.grade }})</p>
+        <p><strong>Due Date:</strong> {{ assignment.due_date|date:"F j, Y" }}</p>
+        <p><strong>Description:</strong></p>
+        <p class="assignment-description">{{ assignment.description }}</p>
+
+        {% if assignment.file %}
+            <p><strong>Attached File:</strong>
+                <a href="{{ assignment.file.url }}" target="_blank" class="download-link">Download File</a>
+            </p>
+        {% else %}
+            <p class="no-file">No file attached.</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'my_assignments' %}" class="btn back-btn">← Back to My Assignments</a>
+</div>
+{% endblock %}

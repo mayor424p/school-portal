@@ -1,0 +1,42 @@
+{% extends "core/dashboard2.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/leave.css' %}">
+
+<div class="leave-status-container">
+    <div class="leave-header">
+        <h2>Your Leave Requests</h2>
+        <a href="{% url 'request_leave' %}" class="btn btn-request">+ Request Leave</a>
+    </div>
+
+    {% if leaves %}
+        <table class="leave-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Purpose</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leave in leaves %}
+                <tr>
+                    <td>{{ leave.subject }}</td>
+                    <td>{{ leave.purpose }}</td>
+                    <td>{{ leave.start_date }}</td>
+                    <td>{{ leave.end_date }}</td>
+                    <td class="status {{ leave.status }}">{{ leave.get_status_display }}</td>
+                    <td>{{ leave.submitted_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No leave requests submitted yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

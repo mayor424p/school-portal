@@ -1,0 +1,32 @@
+{% extends 'core/dashboard.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/note_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="note-detail-container">
+    <h2>{{ note.title }}</h2>
+
+    <p><strong>Subject:</strong> {{ note.subject }}</p>
+    <p><strong>Class:</strong> {{ note.target_class }}</p>
+    <p><strong>Date:</strong> {{ note.timestamp|date:"Y-m-d" }}</p>
+    <p><strong>Time:</strong> {{ note.timestamp|time:"H:i" }}</p>
+
+    {% if note.description %}
+        <p><strong>Description:</strong></p>
+        <p>{{ note.description }}</p>
+    {% else %}
+        <p><em>No description provided.</em></p>
+    {% endif %}
+
+    {% if note.file %}
+        <p><a href="{{ note.file.url }}" download>📄 Download Note</a></p>
+    {% else %}
+        <p><em>No file uploaded for this note.</em></p>
+    {% endif %}
+
+    <p><a href="{% url 'student_notes' %}">← Back to Notes</a></p>
+</div>
+{% endblock %}

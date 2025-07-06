@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teachers dashboard</title>
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body class="student-dashboard-body">
+    <nav class="student-navbar">
+        <div class="student-navbar-container">
+            <div class="student-logo-container">
+                <a href="{% url 'student_dashboard' %}" class="student-logo">
+                  <img src="{% static 'core/images/logo.png' %}" alt="School Logo" class="student-logo-img">
+                </a>
+            </div>
+            <div class="student-profile-container">
+                <div class="student-user-profile">
+                  
+                  <div class="student-profile-icon">
+                    {% with request.user.studentprofileinfo as user_profile %}
+                    {% if user_profile.profile_picture %}
+                      <img src="{{ user_profile.profile_picture.url }}" alt="Profile">
+                    {% else %}
+                      <i class="fas fa-user-circle"></i>
+                    {% endif %}
+                    {% endwith %}
+                  </div>
+                </div>
+              </div>   
+          
+          
+        </div>
+    </nav>
+
+    <div class="student-dashboard-container">
+      <aside class="student-sidebar">
+        <ul class="student-menu">
+          <li class="student-active"><a href="{% url 'teacher_dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
+          <li><a href="{% url 'teacher_profile' %}"><i class="fas fa-user"></i> Teachers Profile</a></li>
+          <li><a href="{% url 'my_assignments' %}"><i class="fas fa-upload"></i> Assignments</a></li>
+          <li><a href="{% url 'teacher_notes' %}"><i class="fas fa-file-alt"></i> Notes</a></li>
+          <li><a href="{% url 'grade_upload_history' %}"><i class="fas fa-graduation-cap"></i> Grading</a></li>
+          <li><a href="{% url 'leave_status' %}"><i class="fas fa-calendar-times"></i>leave</a></li>
+          
+          <li><a href=""><i class="fas fa-headset"></i> settings</a></li>
+          <li>
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </form>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="student-main-content">
+        {% block content %}
+        {% endblock %}
+      </main>
+    </div>
+
+    <script src="{% static 'core/js/animations.js' %}"></script>
+</body>
+</html>

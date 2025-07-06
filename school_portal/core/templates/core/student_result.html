@@ -1,0 +1,47 @@
+{% extends "core/dashboard.html" %}
+{% load static %}
+{% block title %}My Results{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/result.css' %}">
+
+<div class="result-container">
+    <h2 class="result-heading">My Results</h2>
+
+    {% if results %}
+        {% for key, grades in results.items %}
+            <div class="term-block">
+                <h3 class="term-title">{{ key }}</h3>
+                <div class="table-wrapper">
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>1st CA</th>
+                                <th>2nd CA</th>
+                                <th>3rd CA</th>
+                                <th>Exam</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for grade in grades %}
+                            <tr>
+                                <td>{{ grade.subject }}</td>
+                                <td>{{ grade.first_ca }}</td>
+                                <td>{{ grade.second_ca }}</td>
+                                <td>{{ grade.third_ca }}</td>
+                                <td>{{ grade.exam }}</td>
+                                <td><strong>{{ grade.total_score }}</strong></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-result">You have no approved results yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

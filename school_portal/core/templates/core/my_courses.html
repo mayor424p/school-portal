@@ -1,0 +1,41 @@
+{% extends "core/dashboard.html" %}
+{% block title %}My Courses{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="courses-container">
+    <h2>Courses Offered by {{ student_class.get_grade_display }}</h2>
+
+    {% if courses %}
+        <table class="courses-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Code</th>
+                    <th>Teacher</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.subject.name }}</td>
+                    <td>{{ course.subject.code|default:"—" }}</td>
+                    <td>
+                        {% if course.teacher %}
+                            {{ course.teacher.user.get_full_name }}
+                        {% else %}
+                            Not assigned
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="no-courses-message">
+            No subjects have been assigned to your class yet.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

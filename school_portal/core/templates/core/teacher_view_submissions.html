@@ -1,0 +1,47 @@
+{% extends "core/dashboard2.html" %}
+{% block title %}View Student Submissions{% endblock %}
+{% load static %}
+{% block content %}
+
+<h2>Submissions for "{{ assignment.title }}"</h2>
+
+{% if submissions %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Submitted On</th>
+            <th>Status</th>
+            <th>Download File</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for submission in submissions %}
+            <tr>
+                <td>{{ submission.student.get_full_name|default:submission.student.username }}</td>
+                <td>{{ submission.submitted_on|date:"F j, Y H:i" }}</td>
+                <td>
+                    {% if submission.file %}
+                        Submitted
+                    {% else %}
+                        No file uploaded
+                    {% endif %}
+                </td>
+                <td>
+                    {% if submission.file %}
+                        <a href="{{ submission.file.url }}" class="btn btn-primary btn-sm" download>Download</a>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No submissions found for this assignment.</p>
+{% endif %}
+
+<a href="{% url 'my_assignments' %}" class="btn btn-secondary">Back to Assignments</a>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'core/dashboard2.html' %}
+{% load static %}
+{% block title %}Upload Student Grade{% endblock %}
+
+{% block content %}
+<div class="upload-grade-container">
+    <h2 class="upload-title">Upload Grade for a Student</h2>
+
+    <!-- Class Selection Form -->
+    <form method="get" class="class-filter-form">
+        <div class="form-group">
+            <label for="id_student_class" class="form-label">Select Class</label>
+            <select name="student_class" id="id_student_class" class="form-control" onchange="this.form.submit()">
+                <option value="">---------</option>
+                {% for class in form.fields.student_class.queryset %}
+                    <option value="{{ class.id }}" {% if selected_class and class.id == selected_class.id %}selected{% endif %}>
+                        {{ class.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    {% if selected_class %}
+    <!-- Grade Submission Form -->
+    <form method="post" class="grade-form">
+        {% csrf_token %}
+        <input type="hidden" name="student_class" value="{{ selected_class.id }}">
+
+        <div class="form-group">
+            {{ form.student.label_tag }}
+            {{ form.student }}
+        </div>
+
+        <div class="form-group">
+            {{ form.subject.label_tag }}
+            {{ form.subject }}
+        </div>
+
+        <div class="form-group">
+            {{ form.first_ca.label_tag }}
+            {{ form.first_ca }}
+        </div>
+
+        <div class="form-group">
+            {{ form.second_ca.label_tag }}
+            {{ form.second_ca }}
+        </div>
+
+        <div class="form-group">
+            {{ form.third_ca.label_tag }}
+            {{ form.third_ca }}
+        </div>
+
+        <div class="form-group">
+            {{ form.exam.label_tag }}
+            {{ form.exam }}
+        </div>
+
+        <div class="form-group">
+            {{ form.term.label_tag }}
+            {{ form.term }}
+        </div>
+
+        <div class="form-group">
+            {{ form.session.label_tag }}
+            {{ form.session }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Grade</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

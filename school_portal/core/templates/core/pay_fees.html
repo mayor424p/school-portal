@@ -1,0 +1,22 @@
+{% extends "core/dashboard.html" %}
+{% block title %}Pay School Fees{% endblock %}
+{% block content %}
+
+<div class="payment-container">
+  <h2>Pay School Fees</h2>
+
+  <div class="fee-summary">
+    <p><strong>Your Class:</strong> {{ fee_info.student.studentprofile.student_class }}</p>
+    <p><strong>Total Fee:</strong> ₦{{ fee_info.class_fee.total_fee }}</p>
+    <p><strong>Paid So Far:</strong> ₦{{ fee_info.paid_amount }}</p>
+    <p><strong>Balance Due:</strong> ₦{{ fee_info.balance }}</p>
+  </div>
+
+  <form method="post" class="payment-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-proceed">Proceed to Payment</button>
+  </form>
+</div>
+
+{% endblock %}

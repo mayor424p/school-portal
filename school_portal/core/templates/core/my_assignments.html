@@ -1,0 +1,62 @@
+{% extends "core/dashboard2.html" %}
+{% block title %}My Assignments{% endblock %}
+
+{% block content %}
+<div class="assignments-container">
+    <div class="assignments-header">
+        <h2 class="section-title">📚 My Uploaded Assignments</h2>
+        <div class="btn-group">
+            <a href="{% url 'create_assignment' %}" class="btn upload-btn">+ Upload Assignment</a>
+            <form method="post" class="clear-form">
+                {% csrf_token %}
+                <button type="submit" name="clear_all" class="btn clear-btn" onclick="return confirm('Are you sure you want to delete all assignments?')">
+                    🗑️ Clear All
+                </button>
+            </form>
+        </div>
+    </div>
+
+    {% if assignments %}
+        <div class="table-wrapper">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Due Date</th>
+                        <th>Class</th>
+                        <th>File</th>
+                        <th>Submissions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for assignment in assignments %}
+                        <tr>
+                            <td>{{ assignment.title }}</td>
+                            <td>{{ assignment.due_date|date:"F j, Y" }}</td>
+                            <td>{{ assignment.assigned_class.name }}</td>
+                            <td>
+                                {% if assignment.file %}
+                                    <a href="{{ assignment.file.url }}" target="_blank" class="file-link">Download</a>
+                                {% else %}
+                                    <span class="no-file">No file</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'teacher_view_submissions' assignment.id %}" class="submissions-link">
+                                    View ({{ assignment.submission_set.count }})
+                                </a>
+                            </td>
+                            <td>
+                                <a href="?delete={{ assignment.id }}" class="delete-link" onclick="return confirm('Delete this assignment?')">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="no-assignment-msg">You haven’t uploaded any assignments yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

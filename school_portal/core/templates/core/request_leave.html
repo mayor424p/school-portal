@@ -1,0 +1,30 @@
+{% extends "core/dashboard2.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/leave.css' %}">
+
+<div class="leave-request-container">
+    <h2>Apply for Leave</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_subject">Subject</label>
+            {{ form.subject }}
+        </div>
+        <div class="form-group">
+            <label for="id_purpose">Purpose of Leave</label>
+            {{ form.purpose }}
+        </div>
+        <div class="form-group">
+            <label for="id_start_date">Start Date</label>
+            {{ form.start_date }}
+        </div>
+        <div class="form-group">
+            <label for="id_end_date">End Date</label>
+            {{ form.end_date }}
+        </div>
+        <button type="submit" class="btn-submit">Submit Leave Request</button>
+    </form>
+</div>
+{% endblock %}

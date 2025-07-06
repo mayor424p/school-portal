@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block body_class %}no-scroll{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <h2 class="contact-heading">Contact Us</h2>
+
+    {% if success %}
+    <div class="success-container">
+        <div id="successMsg" class="success-message">
+            <i class="fas fa-check-circle"></i> Thank you! Your message has been sent.
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="contact-row">
+        <form method="post" class="contact-form" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+
+        <div class="contact-info">
+            <h4><i class="fas fa-school"></i> School Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> Dafara, Kuje, Abuja</p>
+            <p><i class="fas fa-phone-alt"></i> <strong>Phone:</strong> 09043522111</p>
+            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> 
+                <a href="mailto:mayowad19@gmail.com">mayowad19@gmail.com</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const successMsg = document.getElementById("successMsg");
+    if (successMsg) {
+      setTimeout(() => {
+        successMsg.classList.add("show");
+      }, 100);
+  
+      setTimeout(() => {
+        successMsg.classList.remove("show");
+      }, 4000);
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'core/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="student-welcome-banner">
+  <h1 class="animated-welcome">Welcome, {{ first_name }}</h1>
+  <p>Here's what's happening with your account today</p>
+</div>
+
+<div class="student-dashboard-grid">
+  <!-- Announcements Card -->
+  <div class="student-dashboard-card student-announcements">
+    <h2><i class="fas fa-bullhorn"></i> Announcements</h2>
+    <div class="student-card-content">
+      <p>No new announcements at this time.</p>
+    </div>
+  </div>
+
+  <!-- Quick Links Card -->
+  
+
+  <!-- Assignments Card -->
+  <div class="student-dashboard-card student-assignments-card" id="assignments">
+    <h2><i class="fas fa-tasks"></i> Assignments</h2>
+    <div class="student-card-content">
+      {% for assignment in assignments %}
+        <div class="student-assignment-item">
+          <h3>{{ assignment.title }}</h3>
+          <p>{{ assignment.description|truncatechars:100 }}</p>
+          <a href="{{ assignment.file.url }}" target="_blank" class="student-download-btn">
+            <i class="fas fa-download"></i> Download
+          </a>
+        </div>
+      {% empty %}
+        <p class="student-no-data">No assignments available.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Notes Card -->
+  <div class="student-dashboard-card student-notes-card" id="notes">
+    <h2><i class="fas fa-book"></i> Notes</h2>
+    <div class="student-card-content">
+      {% for note in notes %}
+        <a href="{{ note.file.url }}" target="_blank" class="student-note-item">
+          <i class="fas fa-file-alt"></i> {{ note.title }}
+        </a>
+      {% empty %}
+        <p class="student-no-data">No notes available.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Results Card -->
+  <div class="student-dashboard-card student-results-card" id="results">
+    <h2><i class="fas fa-chart-line"></i> Term Results</h2>
+    <div class="student-card-content">
+      {% for result in results %}
+        <a href="{{ result.result_file.url }}" target="_blank" class="student-result-item">
+          <i class="fas fa-file-pdf"></i> Term: {{ result.term }}
+        </a>
+      {% empty %}
+        <p class="student-no-data">No results available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

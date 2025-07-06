@@ -1,0 +1,47 @@
+{% extends 'core/dashboard2.html' %}
+{% load static %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="teacher-welcome-header">
+        <h2>Welcome, {{ request.user.first_name }}</h2>
+        <p class="welcome-message">Here's what's happening today</p>
+    </div>
+    
+    <div class="dashboard-section">
+        <a href="" class="dashboard-card">
+            <i class="fas fa-upload"></i>
+            <span>Upload Assignments</span>
+        </a>
+        
+        <a href="" class="dashboard-card">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Grade Student Assignments</span>
+        </a>
+        
+        <a href="" class="dashboard-card">
+            <i class="fas fa-file-alt"></i>
+            <span>Upload Notes</span>
+        </a>
+        
+        <a href="" class="dashboard-card">
+            <i class="fas fa-calendar-alt"></i>
+            <span>View Meetings</span>
+        </a>
+        
+        <a href="" class="dashboard-card">
+            <i class="fas fa-calendar-times"></i>
+            <span>Request Leave</span>
+        </a>
+        
+        <!-- Optional additional cards -->
+        <a href="" class="dashboard-card">
+            <i class="fas fa-chart-line"></i>
+            <span>Student Progress</span>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+

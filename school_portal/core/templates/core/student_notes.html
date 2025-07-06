@@ -1,0 +1,40 @@
+{% extends 'core/dashboard.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/student_notes.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="student-notes-container">
+    <h2 class="page-title">Available Notes for Your Class</h2>
+    <table class="student-notes-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for note in notes %}
+            <tr>
+                <td>{{ note.title }}</td>
+                <td>{{ note.subject.name }}</td>
+                <td>{{ note.timestamp|date:"Y-m-d" }}</td>
+                <td>{{ note.timestamp|time:"H:i" }}</td>
+                <td>
+                    <a href="{% url 'view_note_detail' note.id %}" class="view-btn">
+                        View 📄
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="no-notes">No notes available yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %} <!-- if you have a base.html -->
+{% load static %}
+{% block content %}
+<section class="events-section">
+    <h1 class="section-title">Latest Events & News</h1>
+    <div class="events-container">
+        {% for event in events %}
+        <div class="event-card">
+            {% if event.image %}
+            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image">
+            {% endif %}
+            <div class="event-content">
+                <h2>
+                    <a href="{% url 'event_detail' event.slug %}">
+                        {{ event.title }}
+                    </a>
+                  
+                </h2>
+                <p class="event-date">{{ event.date_posted|date:"F d, Y" }}</p>
+                <a href="{% url 'event_detail' event.slug %}" class="read-more">Read More →</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No events/news have been posted yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% block title %}Apply Now{% endblock %}
+
+{% block content %}
+<div class="apply-now-wrapper">
+    <div class="apply-now-box">
+        <h2 class="apply-now-heading">Apply for Admission</h2>
+
+        {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    <div class="success-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" class="apply-now-form">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

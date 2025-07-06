@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login{% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-row">
+        <div class="login-card">
+            <h2 class="login-title">LOGIN</h2>
+                
+            
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level_tag != "success" or request.path == '/login/' %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form method="post" class="login-form" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address:</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password:</label>
+                    {{ form.password }}
+                </div>
+
+                <div class="submit-btn-container">
+                    <button type="submit" class="submit-btn">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

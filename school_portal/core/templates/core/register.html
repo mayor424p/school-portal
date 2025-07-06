@@ -1,0 +1,123 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="side-animation left">
+  <span class="arrow-text"> Register Now➡️</span>
+</div>
+
+<div class="side-animation right">
+  <span class="arrow-text">⬅️Register Now</span>
+</div>
+
+<div class="register-container">
+  <h2>Register</h2>
+
+  
+
+  <form method="POST" novalidate>
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="first_name">First Name:</label>
+      <input type="text" name="first_name" value="{{ user_form.first_name.value }}"  required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="middle_name">Middle Name:</label>
+      <input type="text" name="middle_name" value="{{ user_form.middle_name.value }}" >
+    </div>
+    
+    <div class="form-group">
+      <label for="last_name">Surname:</label>
+      <input type="text" name="last_name" value="{{ user_form.last_name.value }}" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email Address:</label>
+      <input type="email" name="email" value="{{ user_form.email.value }}" required>
+    </div>
+    <div class="form-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" name="dob"  value="{{ user_form.dob.value }}" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="role">Registering as:</label>
+      <select name="role" id="role" class="form-control" required>
+        <option value="">-- Select Role --</option>
+        <option value="student" {% if role == 'student' %}selected{% endif %}>Student</option>
+        <option value="teacher" {% if role == 'teacher' %}selected{% endif %}>Teacher</option>
+      </select>
+    </div>
+    
+
+    <!-- Student Fields -->
+    <div id="studentFields" style="display: none">
+  
+      <div class="form-group">
+        <label for="{{ profile_form.student_class.id_for_label }}">Class:</label>
+        {{ profile_form.student_class }}
+      </div>
+    
+      <div class="form-group">
+        <label for="admission_number">Admission Number:</label>
+        <input type="text" name="admission_number" value="{{ profile_form.admission_number.value }}" class="form-control" required id="id_admission_number">
+      </div>
+    
+    </div>
+    
+    <!-- Teacher Fields -->
+    <div id="teacherFields" style="display: none;" class="form-group">
+      <label for="subject">Subject:</label>
+      <input type="text" name="subject" value="{{ profile_form.subject.value }}" id="id_subject">
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="id_password1">Password:</label>
+      <input type="password" name="password1" id="id_password1" required>
+      {% if user_form.password1.errors %}
+      <div class="error">{{ user_form.password1.errors }}</div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="id_password2">Confirm Password:</label>
+      <input type="password" name="password2" id="id_password2" required>
+      {% if user_form.password2.errors %}
+        <div class="error">{{ user_form.password2.errors }}</div>
+      {% endif %}
+    </div>
+    
+
+    
+    {% if user_form.errors or profile_form.errors %}
+  <div class="error-messages">
+    <ul>
+      {% for field in user_form %}
+        {% for error in field.errors %}
+          <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+      {% for field in profile_form %}
+        {% for error in field.errors %}
+          <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+      <button type="submit" class="submit-btn">Register</button>
+
+
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'core/js/animations.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}

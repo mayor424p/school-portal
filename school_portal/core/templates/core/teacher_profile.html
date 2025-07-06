@@ -1,0 +1,34 @@
+{% extends "core/dashboard2.html" %}
+{% block title %}Teacher Profile{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="profile-page">
+    <h2 class="profile-heading">test profile page </h2>
+
+    <div class="profile-image-wrapper">
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="180" height="180" />
+        {% else %}
+            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile" width="180" height="180" />
+        {% endif %}
+    </div>
+
+    <div class="profile-info-form">
+        <p><strong>Name:</strong> {{ user.get_full_name|default:user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Subject:</strong> {{ profile.subject }}</p>
+
+        <form method="post" enctype="multipart/form-data" class="profile-pic-form">
+            {% csrf_token %}
+            <div class="form-field">
+                {{ form.profile_picture.label_tag }}
+                {{ form.profile_picture }}
+                <small class="form-text text-muted">{{ form.profile_picture.help_text }}</small>
+            </div>
+            <button type="submit" class="upload-btn">Update Profile Picture</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

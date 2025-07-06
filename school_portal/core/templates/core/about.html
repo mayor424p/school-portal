@@ -1,0 +1,163 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<section class="about-hero">
+    <div class="about-hero-text">
+        <h1>About JH TOTAL CHILD ACADEMY</h1>
+        <p>Inspiring minds. building Futures. </p>
+    </div>
+</section>
+
+<section class="school-history">
+    <div class="school-history-container">
+        <h2 id="history-heading" class="typing-heading"></h2>
+        <p class="history-text">Founded in April 2009 by 
+        <strong> MR. and Mrs. Abioye</strong> 
+        in Dafara, Kuje, Abuja the school began with 11 children and two dedicated teachers. over the years, 
+        we have grown into a thriving academic community to excellence in education and character-building.
+        </p>
+    </div>
+</section>
+
+<section class="vision-mission">
+    <div class=" vision-mission-container">
+        <div class="mission-box">
+            <h2>Our Mission</h2>
+            <p>"Our mission is to provide a nurturing and holistic educational environment that fosters the development of children's moral, 
+                physical, intellectual, social, 
+                and emotional well-being. 
+                We aim to instill a strong sense of responsibility, critical thinking, and compassion, empowering them to become confident, capable, and caring individuals who make a positive impact in the world."
+            </p>
+        </div>
+        <div class="vision-box">
+            <h2>Our Vision</h2>
+            <p> Our vision is to groom children to be sound morally, physically, intellectually, socially and emotionally.
+                To sow a seed of high level of responsibility as they grow to become adult.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<section class="founder-info">
+    <div class="founder-container">
+        <div class="founder-image">
+            <img src="{% static 'core/images/founders.jpg' %}" alt="founders of the school">
+        </div>
+        <div class="founder-text">
+            <h2>Our Founders</h2>
+            <p><strong>Mr. and Mrs. Abioye</strong> are passionate educators who envisioned a learning enviroment
+                where children are empowered, creative, and morally upright. 
+                their leadership and commitment have  shaped the school's journey since 2009.
+            </p>
+            <p><strong>Date Founded:</strong> April 2009</p>
+        </div>
+        
+    </div>
+</section>
+
+<section class="classes-section">
+    <div class="classes-container">
+        <h2 class="section-title">Available Classes</h2>
+        <div class="classes-list">
+            <a href="/apply-now" class="class-card">
+                <img src="{% static 'core/images/creche.jpg' %}" alt="creche class">
+                <div class="class-card-content">
+                    <h3>Creche</h3>
+                    <p>Explore early childhood education for the youngest learners.</p>
+                </div>
+            </a>
+            <a href="/apply-now" class="class-card">
+                <img src="{% static 'core/images/nusery.jpg' %}" alt="nursery class">
+                <div class="class-card-content">
+                    <h3>Nursery</h3>
+                    <p>Providing a strong foundation for early learners.</p>
+                </div>
+            </a>
+            <a href="/apply-now" class="class-card">
+                <img src="{% static 'core/images/primary.jpg' %}" alt="primary class">
+                <div class="class-card-content">
+                    <h3>Primary (Grades 1 - 6)</h3>
+                    <p>A complete primary school education with fun and interactive learning.</p>
+                </div>
+            </a>
+            <a href="/apply-now" class="class-card">
+                <img src="{% static 'core/images/secondary.jpg' %}" alt="secondary class">
+                <div class="class-card-content">
+                    <h3>Junior Secondary</h3>
+                    <p>Prepare for high school with a well-rounded curriculum.</p>
+                </div>
+            </a>
+            <a href="/apply-now" class="class-card">
+                <img src="{% static 'core/images/secondary2.jpg' %}" alt="secondary class">
+                <div class="class-card-content">
+                    <h3>Senior Secondary</h3>
+                    <p>Focused on academic excellence and career readiness.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="achievements-section">
+    
+    <h2>Our Achievements</h2>
+    <p>We have proudly participated and excelled in several academic competitions including:</p>
+    <div class="achievements-scroll-wrapper">
+        <ul class="achievements-list">
+            <li><i class="fas fa-medal"></i> 1st place in Mathematics Quiz</li>
+            <li><i class="fas fa-flask"></i> 2nd place in Science Quiz</li>
+            <li><i class="fas fa-microphone-alt"></i> Winners of Inter-school Debate Challenge</li>
+            <li><i class="fas fa-university"></i> Educational excursions to historical sites and science museums</li>
+        </ul>
+    </div>
+      
+    
+  </section>
+  
+  
+ 
+  
+  
+  <section class="extracurriculars">
+    <div class="extracurricular-container">
+      <h2>Our Extracurricular Activities</h2>
+      <div class="activities-grid">
+        <div class="activity">
+          <img src="{% static 'core/images/special-lessons.jpg' %}" alt="Special Lessons">
+          <h3>Special Lessons</h3>
+          <p>Personalized learning sessions to support academic improvement.</p>
+        </div>
+        <div class="activity">
+          <img src="{% static 'core/images/sports.jpg' %}" alt="Sports">
+          <h3>Sports</h3>
+          <p>Football, athletics, and indoor games to build team spirit and fitness.</p>
+        </div>
+        <div class="activity">
+          <img src="{% static 'core/images/reading.jpg' %}" alt="Reading Club">
+          <h3>Reading Club</h3>
+          <p>Encouraging a love for literature and enhancing comprehension.</p>
+        </div>
+        <div class="activity">
+          <img src="{% static 'core/images/debate.jpg' %}" alt="Debate Club">
+          <h3>Debate Club</h3>
+          <p>Empowering students with critical thinking and public speaking skills.</p>
+        </div>
+        <div class="activity">
+          <img src="{% static 'core/images/art.jpg' %}" alt="Art Classes">
+          <h3>Art Classes</h3>
+          <p>Exploring creativity through drawing, painting, and design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="services-section">
+    <div class="services-container">
+      <h2>Our Services</h2>
+      <p>We offer high-quality teaching, pastoral care, extracurricular engagement, digital learning support, counseling services, and career guidance for senior students.</p>
+    </div>
+  </section>   
+{% endblock %}

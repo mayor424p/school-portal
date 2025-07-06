@@ -1,0 +1,43 @@
+{% extends 'core/dashboard2.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/notes.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="upload-note-section">
+    <h2 class="upload-note-title">Upload Note</h2>
+    <form method="POST" enctype="multipart/form-data" class="upload-note-form">
+        {% csrf_token %}
+        
+        <div class="upload-form-group">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+        
+        <div class="upload-form-group">
+            {{ form.subject_name.label_tag }}
+            {{ form.subject_name }}
+            <small class="form-text">{{ form.subject_name.help_text }}</small>
+        </div>
+        
+        <div class="upload-form-group">
+            {{ form.target_class.label_tag }}
+            {{ form.target_class }}
+        </div>
+        
+        <div class="upload-form-group">
+            {{ form.file.label_tag }}
+            {{ form.file }}
+        </div>
+        
+        <div class="upload-form-group">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        
+        <button type="submit" class="upload-btn">Upload Note</button>
+    </form>
+</div>
+{% endblock %}

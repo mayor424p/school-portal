@@ -1,0 +1,54 @@
+{% extends "core/student_dashboard.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/student_profile.css' %}">
+
+<div class="profile-page">
+    <div class="profile-heading">
+        <div class="profile-image-wrapper">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+            {% else %}
+                <img src="{% static 'core/images/default-user.jpg' %}" alt="No Profile">
+            {% endif %}
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="profile-pic-form">
+            {% csrf_token %}
+            <div class="file-input-wrapper">
+                <label class="file-input-label">
+                    Choose Profile Picture
+                    <input type="file" name="profile_picture" id="id_profile_picture" class="file-input">
+                </label>
+            </div>
+            <div class="form-buttons">
+                {% if profile.profile_picture %}
+                    <button type="submit" name="delete" class="delete-btn">Delete</button>
+                {% else %}
+                    <button type="submit" name="upload" class="upload-btn">Upload</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <form method="POST" class="profile-info-form">
+        {% csrf_token %}
+        <div class="form-static">
+            <p><strong>Full Name:</strong> {{ request.user.get_full_name }}</p>
+            <p><strong>Class:</strong> {{ profile.student_class }}</p>
+            <p><strong>Admission Number:</strong> {{ request.user.admission_number }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+        </div>
+
+        <div class="form-field">
+            <label>Update Class:</label>
+            <input type="text" name="student_class" value="{{ profile.student_class }}">
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" name="update_info" class="save-btn">Save Changes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
