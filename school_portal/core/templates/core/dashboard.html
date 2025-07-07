@@ -15,20 +15,21 @@
                   <img src="{% static 'core/images/logo.png' %}" alt="School Logo" class="student-logo-img">
                 </a>
             </div>
-            <div class="student-profile-container">
-                <div class="student-user-profile">
-                  
-                  <div class="student-profile-icon">
-                    {% with request.user.studentprofileinfo as user_profile %}
-                    {% if user_profile.profile_picture %}
-                      <img src="{{ user_profile.profile_picture.url }}" alt="Profile">
-                    {% else %}
-                      <i class="fas fa-user-circle"></i>
-                    {% endif %}
-                    {% endwith %}
-                  </div>
-                </div>
-              </div>   
+           <div class="student-profile-container">
+  <div class="student-user-profile">
+    <a href="{% url 'student_profile' %}" class="student-profile-icon">
+      {% with request.user.studentprofile as profile %}
+        {% if profile.profile_picture %}
+          <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
+        {% else %}
+          <img src="{% static 'core/images/default-user.jpg' %}" alt="Default Profile" />
+        {% endif %}
+      {% endwith %}
+    </a>
+  </div>
+</div>
+
+              
           
           
         </div>
@@ -47,14 +48,16 @@
           <li><a href="{% url 'my_courses' %}"><i class="fas fa-book-open"></i> My Courses</a></li>
           
          
-          <li>
-            <form action="{% url 'logout' %}" method="post" style="display: inline;">
-              {% csrf_token %}
-              <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </button>
-            </form>
-          </li>
+        <li>
+          <form action="{% url 'logout' %}" method="post" class="sidebar-logout-form">
+            {% csrf_token %}
+            <button type="submit" class="sidebar-logout-button">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </form>
+        </li>
+
+
         </ul>
       </aside>
 

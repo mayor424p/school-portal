@@ -5,15 +5,7 @@
 <div class="assignments-container">
     <div class="assignments-header">
         <h2 class="section-title">📚 My Uploaded Assignments</h2>
-        <div class="btn-group">
-            <a href="{% url 'create_assignment' %}" class="btn upload-btn">+ Upload Assignment</a>
-            <form method="post" class="clear-form">
-                {% csrf_token %}
-                <button type="submit" name="clear_all" class="btn clear-btn" onclick="return confirm('Are you sure you want to delete all assignments?')">
-                    🗑️ Clear All
-                </button>
-            </form>
-        </div>
+        
     </div>
 
     {% if assignments %}
@@ -58,5 +50,15 @@
     {% else %}
         <p class="no-assignment-msg">You haven’t uploaded any assignments yet.</p>
     {% endif %}
-</div>
+
+    <div class="btn-group">
+            <a href="{% url 'create_assignment' %}" class="btn upload-btn">+ Upload Assignment</a>
+            <form method="post" class="clear-form">
+                {% csrf_token %}
+                <button type="submit" name="clear_all" class="btn clear-btn" onclick="return confirm('Are you sure you want to delete all assignments?')">
+                    🗑️ Clear All
+                </button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

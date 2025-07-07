@@ -3,45 +3,51 @@
 {% load static %}
 {% block content %}
 
-<h2>Submissions for "{{ assignment.title }}"</h2>
+<div class="submission-container">
+  <h2 class="submission-heading">Submissions for "{{ assignment.title }}"</h2>
 
-{% if submissions %}
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Student Name</th>
-            <th>Submitted On</th>
-            <th>Status</th>
-            <th>Download File</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for submission in submissions %}
+  {% if submissions %}
+  <div class="table-wrapper">
+    <table class="submission-table">
+        <thead>
             <tr>
-                <td>{{ submission.student.get_full_name|default:submission.student.username }}</td>
-                <td>{{ submission.submitted_on|date:"F j, Y H:i" }}</td>
-                <td>
-                    {% if submission.file %}
-                        Submitted
-                    {% else %}
-                        No file uploaded
-                    {% endif %}
-                </td>
-                <td>
-                    {% if submission.file %}
-                        <a href="{{ submission.file.url }}" class="btn btn-primary btn-sm" download>Download</a>
-                    {% else %}
-                        —
-                    {% endif %}
-                </td>
+                <th>Student Name</th>
+                <th>Submitted On</th>
+                <th>Status</th>
+                <th>Download File</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>No submissions found for this assignment.</p>
-{% endif %}
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+                <tr>
+                    <td>{{ submission.student.get_full_name|default:submission.student.username }}</td>
+                    <td>{{ submission.submitted_on|date:"F j, Y H:i" }}</td>
+                    <td>
+                        {% if submission.file %}
+                            <span class="badge-submitted">Submitted</span>
+                        {% else %}
+                            <span class="badge-missing">No file uploaded</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if submission.file %}
+                            <a href="{{ submission.file.url }}" class="btn-download" download>Download</a>
+                        {% else %}
+                            <span class="no-download">—</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p class="no-submissions">No submissions found for this assignment.</p>
+  {% endif %}
 
-<a href="{% url 'my_assignments' %}" class="btn btn-secondary">Back to Assignments</a>
+  <div class="submission-actions">
+    <a href="{% url 'my_assignments' %}" class="btn-back-submissions">← Back to Assignments</a>
+  </div>
+</div>
 
 {% endblock %}

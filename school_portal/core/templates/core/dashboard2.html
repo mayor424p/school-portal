@@ -15,20 +15,18 @@
                   <img src="{% static 'core/images/logo.png' %}" alt="School Logo" class="student-logo-img">
                 </a>
             </div>
+
             <div class="student-profile-container">
-                <div class="student-user-profile">
-                  
-                  <div class="student-profile-icon">
-                    {% with request.user.studentprofileinfo as user_profile %}
-                    {% if user_profile.profile_picture %}
-                      <img src="{{ user_profile.profile_picture.url }}" alt="Profile">
+              <div class="student-user-profile">
+                <a href="{% url 'teacher_profile' %}" class="student-profile-icon">
+                    {% if request.user.teacher_profile.profile_picture %}
+                      <img src="{{ request.user.teacher_profile.profile_picture.url }}" alt="Profile Picture" />
                     {% else %}
-                      <i class="fas fa-user-circle"></i>
+                      <img src="{% static 'core/images/default-user.jpg' %}"  alt="Default Profile" />
                     {% endif %}
-                    {% endwith %}
-                  </div>
+                  </a>
                 </div>
-              </div>   
+              </div>
           
           
         </div>
@@ -44,15 +42,16 @@
           <li><a href="{% url 'grade_upload_history' %}"><i class="fas fa-graduation-cap"></i> Grading</a></li>
           <li><a href="{% url 'leave_status' %}"><i class="fas fa-calendar-times"></i>leave</a></li>
           
-          <li><a href=""><i class="fas fa-headset"></i> settings</a></li>
+          
           <li>
-            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
               {% csrf_token %}
-              <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </button>
             </form>
           </li>
+
         </ul>
       </aside>
 

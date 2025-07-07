@@ -10,36 +10,30 @@
     </div>
     
     <div class="dashboard-section">
-        <a href="" class="dashboard-card">
+        <a href="{% url 'create_assignment' %}" class="dashboard-card">
             <i class="fas fa-upload"></i>
             <span>Upload Assignments</span>
         </a>
         
-        <a href="" class="dashboard-card">
+        <a href="{% url 'grade_upload_history' %}" class="dashboard-card">
             <i class="fas fa-graduation-cap"></i>
-            <span>Grade Student Assignments</span>
+            <span>Grade Student </span>
         </a>
         
-        <a href="" class="dashboard-card">
+        <a href="{% url 'teacher_notes' %}" class="dashboard-card">
             <i class="fas fa-file-alt"></i>
             <span>Upload Notes</span>
         </a>
         
-        <a href="" class="dashboard-card">
-            <i class="fas fa-calendar-alt"></i>
-            <span>View Meetings</span>
-        </a>
         
-        <a href="" class="dashboard-card">
+        
+        <a href="{% url 'request_leave' %}" class="dashboard-card">
             <i class="fas fa-calendar-times"></i>
             <span>Request Leave</span>
         </a>
         
         <!-- Optional additional cards -->
-        <a href="" class="dashboard-card">
-            <i class="fas fa-chart-line"></i>
-            <span>Student Progress</span>
-        </a>
+        
     </div>
 </div>
 

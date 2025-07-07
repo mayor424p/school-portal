@@ -1,11 +1,11 @@
 {% extends 'core/dashboard.html' %}
 {% block title %}{{ assignment.title }} - Details{% endblock %}
-{% block content %}
 
+{% block content %}
 <div class="assignment-details-wrapper">
   <div class="assignment-card">
-    <h1>{{ assignment.title }}</h1>
-    
+    <h1 class="assignment-title">{{ assignment.title }}</h1>
+
     <div class="assignment-meta">
       <p><strong>Due Date:</strong> {{ assignment.due_date|date:"F j, Y" }}</p>
     </div>
@@ -15,20 +15,25 @@
       <p>{{ assignment.description }}</p>
     </div>
 
-    {% if assignment.file %}
-      <p><strong>Download File:</strong> 
-        <a href="{{ assignment.file.url }}" target="_blank" class="download-link">Click here</a>
-      </p>
-    {% else %}
-      <p>No file attached.</p>
-    {% endif %}
+    <div class="assignment-file-section">
+      {% if assignment.file %}
+        <p><strong>Download File:</strong> 
+          <a href="{{ assignment.file.url }}" target="_blank" class="download-link">Click here</a>
+        </p>
+      {% else %}
+        <p class="no-file-msg">No file attached.</p>
+      {% endif %}
+    </div>
   </div>
 
-  <div class="assignment-actions">
-    <a href="{% url 'student_assignments' %}" class="btn-back">← Back to All Assignments</a>
-    <a href="{% url 'submit_assignment' assignment.id %}" class="btn-submit">Submit My Work →</a>
-  </div>
-
+ <div class="assignment-actions">
+    <a href="{% url 'student_assignments' %}" class="assignment-btn back-btn">
+        <i class="fas fa-arrow-left"></i> Back to All Assignments
+    </a>
+    <a href="{% url 'submit_assignment' assignment.id %}" class="assignment-btn submit-btn">
+        Submit My Work <i class="fas fa-arrow-right"></i>
+    </a>
 </div>
 
+</div>
 {% endblock %}

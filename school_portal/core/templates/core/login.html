@@ -10,16 +10,17 @@
         <div class="login-card">
             <h2 class="login-title">LOGIN</h2>
                 
-            
             {% if messages %}
                 {% for message in messages %}
-                    {% if message.level_tag != "success" or request.path == '/login/' %}
+                    {% if message.level_tag != "success" %}
                         <div class="alert alert-{{ message.tags }}">
                             {{ message }}
                         </div>
                     {% endif %}
                 {% endfor %}
             {% endif %}
+
+            
             <form method="post" class="login-form" action="{% url 'login' %}">
                 {% csrf_token %}
 
